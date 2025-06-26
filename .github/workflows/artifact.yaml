@@ -9,10 +9,10 @@ jobs:
             - name: echo-step
               run: echo "Hello, World!" -> hello.txt
             - name: upload-artifact
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v3
               with:
                 name: artifact-test
-                paths: ./hello.txt
+                path: ./hello.txt
 
     download-artifact-job:
         runs-on: ubuntu-latest
