@@ -9,7 +9,7 @@ jobs:
             - name: echo-step
               run: echo "Hello, World!" -> hello.txt
             - name: upload-artifact
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                 name: artifact-test
                 path: ./hello.txt
