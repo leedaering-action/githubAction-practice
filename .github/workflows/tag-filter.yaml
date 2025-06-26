@@ -1,0 +1,12 @@
+name: tag-filter-workflow
+on:
+    push:
+        tags: 
+            - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+    tag-filter-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: echo tag
+              run: echo ${{ github.event.head_commit.modified }}
