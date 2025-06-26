@@ -1,0 +1,12 @@
+name: path-filter-workflow
+on:
+    push:
+        paths:
+            - '.github/workflows/part1/*'
+
+jobs:
+    path-filter-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: echo path
+              run: echo ${{ github.event.head_commit.modified }}
