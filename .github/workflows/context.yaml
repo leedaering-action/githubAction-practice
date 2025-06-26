@@ -6,5 +6,17 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: github context
-              run: echo '{{toJSON(github)}}'
+              run: echo '${{toJSON(github)}}'
+            
+            - name: check github context
+              run: |
+                echo "github.event_name: ${{ github.event_name }}"
+                echo "github.event_path: ${{ github.event_path }}"
+                echo "github.sha: ${{ github.sha }}"
+                echo "github.ref: ${{ github.ref }}"
+                echo "github.ref_name: ${{ github.ref_name }}"
+                echo "github.ref_type: ${{ github.ref_type }}"
+                echo "github.ref_protected: ${{ github.ref_protected }}"
+
+
               
