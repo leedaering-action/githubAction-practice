@@ -1,0 +1,33 @@
+name: starts-ends-contains-workflow
+on: push
+
+jobs:
+    startsWith-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: starts-with-true
+              if: startsWith('githubActions', 'github')
+              run: echo 'githubActions starts with github'
+            - name: starts-with-false
+              if: startsWith('githubActions', 'githubActions')
+              run: echo 'githubActions do not start with githubActions'
+
+    endsWith-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: ends-with-true
+              if: endsWith('githubActions', 'Actions')
+              run: echo 'githubActions ends with Actions'
+            - name: ends-with-false
+              if: endsWith('githubActions', 'githubActions')
+              run: echo 'githubActions do not end with githubActions'
+
+    contains-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: contains-true
+              if: contains('githubActions', 'github')
+              run: echo 'githubActions contains github'
+            - name: contains-false
+              if: contains('githubActions', 'aa')
+              run: echo 'githubActions do not contain githubActions'
