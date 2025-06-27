@@ -1,0 +1,11 @@
+name: environment-workflow
+on: push
+
+jobs:
+    get-environment:
+        runs-on: ubuntu-latest
+        steps:
+        - name: check-environment
+          run: |
+           echo "LEVEL ${{ vars.level }}"
+           echo "LEVEL ${{ secrets.level }}"
