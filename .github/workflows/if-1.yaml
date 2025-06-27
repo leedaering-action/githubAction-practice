@@ -42,7 +42,7 @@ jobs:
         needs: [job4]
         steps:
             - name: echo
-              run: echo hello
+              run: echo hello !
 
 
 
