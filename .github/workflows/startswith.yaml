@@ -9,7 +9,7 @@ jobs:
               if: startsWith('githubActions', 'github')
               run: echo 'githubActions starts with github'
             - name: starts-with-false
-              if: startsWith('githubActions', 'githubActions')
+              if: startsWith('githubActions', 'bb')
               run: echo 'githubActions do not start with githubActions'
 
     endsWith-job:
@@ -19,7 +19,7 @@ jobs:
               if: endsWith('githubActions', 'Actions')
               run: echo 'githubActions ends with Actions'
             - name: ends-with-false
-              if: endsWith('githubActions', 'githubActions')
+              if: endsWith('githubActions', 'github')
               run: echo 'githubActions do not end with githubActions'
 
     contains-job:
