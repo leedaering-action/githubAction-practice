@@ -28,4 +28,22 @@ jobs:
               if: github.event_name != 'push'
               run: echo 'dispatched'
 
+    job4:
+        runs-on: ubuntu-latest
+        steps:
+            - name: exit 1
+              run: exit 1
+            - name: echo
+              run: echo hello
+    
+    job5:
+        runs-on: ubuntu-latest
+        if: always()
+        needs: [job4]
+        steps:
+            - name: echo
+              run: hello
+
+
+
 
