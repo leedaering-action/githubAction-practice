@@ -8,4 +8,4 @@ jobs:
         - name: check-environment
           run: |
            echo "LEVEL ${{ vars.level }}"
-           echo "LEVEL ${{ secrets.level }}"
+           echo "KEY ${{secrets.key}}"
