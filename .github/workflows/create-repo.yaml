@@ -26,5 +26,28 @@ jobs:
               run : |
                 echo ${{secrets.PERSONAL_ACCESS_TOKEN}} | gh auth login --with-token
             - name: create-repo
+              id: create-repo
               run : |
                 gh repo create leedaering-action/${{inputs.prefix}}-${{inputs.name}} --public --add-readme
+            - name: notify-slack
+              if: always()
+              uses: slackapi/slack-github-action@v1.24.0
+              with:
+                payload: |
+                  {
+                    "attachments": [{
+                      "pretext": "New repo created",
+                      "color": "#00FF00",
+                      "fields": [{
+                        "title": "Create Repo result ${{steps.create-repo.outcome}}",
+                        "value": "${{inputs.prefix}}-${{inputs.name}}",
+                        "short": true
+                      }]
+                    }]
+                  }
+              env:
+                SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+                SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+        
+            
+                    
