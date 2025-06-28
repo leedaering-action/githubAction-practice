@@ -4,7 +4,7 @@ on:
         types: [opened]
 
 jobs:
-    get-keyword-job:
+    get-keyword:
         runs-on: ubuntu-latest
         outputs:
             level: ${{ steps.get-keyword.outputs.level }}
@@ -25,3 +25,29 @@ jobs:
             - name: get output
               run: |
                 echo ${{steps.get-keyword.outputs.level}}
+                
+    slack-notify-job:
+        needs: [get-keyword]
+        if: needs.get-keyword.outputs.level != 'Undefined'
+        environment: ${{ needs.get-keyword.outputs.level }}
+        runs-on: ubuntu-latest
+        steps:
+            - name: notify-slack
+              if: always()
+              uses: slackapi/slack-github-action@v1.24.0
+              with:
+                payload: |
+                  {
+                    "attachments": [{
+                      "pretext": "issue alert message",
+                      "color": "28a745",
+                      "fields": [{
+                        "title": "Level ${{needs.get-keyword.outputs.level}}}",
+                        "value": "issue url : ${{github.event.issue.html_url}}",
+                        "short": true
+                      }]
+                    }]
+                  }
+              env: 
+                SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+                SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
